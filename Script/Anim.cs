@@ -14,7 +14,7 @@ public class Anim : MonoBehaviour, IInputClickHandler, IFocusable, ISourceStateH
 	// Use this for initialization
 	void Start () {
 		_animator = GetComponent<Animator> ();
-		flag = false;
+		AnimFlag = false;
 		pos = 0;
 		EyeFlag = false;
 		lookTime = 0;
@@ -26,10 +26,12 @@ public class Anim : MonoBehaviour, IInputClickHandler, IFocusable, ISourceStateH
 		if (EyeFlag) {
 			lookTime += Time.deltaTime;
 			Debug.Log (lookTime);
-			if(lookTime >= 10 && lookTime <= 11){
-				flag = true;
-				_animator.SetTrigger ("touch2");
-				gameObject.transform.parent = null;
+			if(lookTime >= 10){
+				if(AnimFlag){
+					_animator.SetTrigger ("touch2");
+					gameObject.transform.parent = null;
+					AnimFlag = false;
+				}
 			}
 		}
 		/*Down Action
